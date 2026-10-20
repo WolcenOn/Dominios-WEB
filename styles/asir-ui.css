@@ -1,0 +1,277 @@
+/*
+ * ASIR UI · sistema visual compartido (fase piloto: Dominios-WEB)
+ * Archivo aditivo: se carga DESPUÉS del CSS original.
+ * No modifica la lógica, el contenido, las IDs ni los datos de prácticas.
+ * Paleta inspirada en las aplicaciones oscuras del conjunto ASIR.
+ * Los colores semánticos siempre se ajustan juntos, incluidos los de texto.
+ */
+:root {
+  --asir-space-1: 4px;
+  --asir-space-2: 8px;
+  --asir-space-3: 12px;
+  --asir-space-4: 16px;
+  --asir-space-6: 24px;
+  --asir-radius-sm: 9px;
+  --asir-radius-md: 13px;
+  --asir-radius-lg: 18px;
+  --asir-focus: #99610b;
+  --asir-on-accent: #ffffff;
+  --asir-code-bg: #0d1b2d;
+  --shade: #e8eff7; /* Corrección: usado en el CSS original sin declarar. */
+  --bg: #f2f6fa;
+  --surface: #ffffff;
+  --panel: #f7fafc;
+  --surface-2: #e7f4f2;
+  --ink: #172c3d;
+  --muted: #476173;
+  --line: #cbdae3;
+  --blue: #116b74;
+  --green: #08745c;
+  --navy: #102e3b;
+  --amber: #946009;
+  --shadow: 0 10px 28px rgb(12 35 48 / 6%);
+  --radius: var(--asir-radius-lg);
+  color-scheme: light;
+}
+body.dark {
+  --asir-focus: #f9d075;
+  --asir-on-accent: #07252a;
+  --asir-code-bg: #091421;
+  --shade: #172c3b;
+  --bg: #08111d;
+  --surface: #0e1a29;
+  --panel: #102033;
+  --surface-2: #173543;
+  --ink: #eaf4f8;
+  --muted: #b1c8d4;
+  --line: #2c4354;
+  --blue: #53e0ce;
+  --green: #81e0b7;
+  --navy: #183a47;
+  --amber: #f1cc80;
+  --shadow: 0 12px 32px rgb(0 0 0 / 18%);
+  color-scheme: dark;
+}
+html { scroll-padding-top: 100px; }
+body {
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+button, input, select, textarea { font-family: inherit; }
+button:focus-visible, a:focus-visible, input:focus-visible,
+select:focus-visible, textarea:focus-visible, summary:focus-visible {
+  outline: 3px solid var(--asir-focus);
+  outline-offset: 3px;
+}
+button[disabled] { cursor: not-allowed; opacity: .6; }
+input[type="checkbox"], input[type="radio"] { accent-color: var(--green); }
+a:hover { text-underline-offset: 3px; }
+::selection { background: var(--surface-2); color: var(--ink); }
+
+/* Cabecera, navegación y herramientas */
+.top {
+  background: #0b1d2b;
+  border-bottom: 1px solid #264453;
+  box-shadow: 0 4px 18px rgb(0 0 0 / 14%);
+}
+.brand-mark {
+  background: #53e0ce;
+  color: #08252b;
+  border: 1px solid #8cf3e5;
+  border-radius: var(--asir-radius-md);
+}
+.brand strong { letter-spacing: -.01em; font-size: 15px; }
+.brand small { color: #b4cbd7; }
+.tool {
+  background: #152e40;
+  border-color: #3d6072;
+  color: #edf8fa;
+  border-radius: var(--asir-radius-sm);
+  min-height: 38px;
+  transition: background-color .15s, border-color .15s;
+}
+.tool:hover { background: #24465b; border-color: #71b7b6; }
+.tool.primary {
+  background: #53e0ce;
+  border-color: #53e0ce;
+  color: #08252b;
+}
+.tool.primary:hover { background: #80eddf; }
+.aside { background: var(--surface); }
+.aside-label { letter-spacing: .11em; }
+.find, .cmdsearch, .notes {
+  border-radius: var(--asir-radius-sm);
+  background: var(--panel);
+}
+.find:focus, .cmdsearch:focus, .notes:focus,
+.field input:focus, .field select:focus {
+  border-color: var(--blue);
+}
+.navitem {
+  border-radius: var(--asir-radius-sm);
+  transition: background-color .14s, border-color .14s;
+}
+.navitem.active {
+  border-color: var(--blue);
+  background: var(--surface-2);
+  box-shadow: inset 3px 0 0 var(--blue);
+}
+.auxnav button, .cmdfilters button, .snip-switch button,
+.flowstep, .anim-toolbar .toolish { color: var(--ink); }
+.auxnav button:hover, .cmdfilters button:hover,
+.snip-switch button:hover, .flowstep:hover {
+  border-color: var(--blue);
+  background: var(--surface-2);
+}
+.progressbar > span { background: linear-gradient(90deg, #168a95, #53e0ce); }
+
+/* Selector de entorno: variables y contraste corregidos */
+.envbar {
+  background: var(--surface);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 4px 16px rgb(0 0 0 / 6%);
+}
+.envtoggle { background: var(--shade); }
+.envtoggle button { min-height: 40px; }
+.envtoggle button.active {
+  background: var(--blue);
+  color: var(--asir-on-accent);
+}
+.envjump, .action:not(.light):not(.green) {
+  background: var(--blue);
+  color: var(--asir-on-accent);
+  min-height: 40px;
+}
+.envjump:hover, .action:not(.light):not(.green):hover { filter: brightness(1.06); }
+.envcontrols select {
+  background: var(--panel);
+  border-color: var(--line);
+  border-radius: var(--asir-radius-sm);
+  min-height: 40px;
+}
+.guide-strip span, .environ-ribbon, .env-stage,
+.envtask, .checkcode { background: var(--shade); }
+.guide-step, .errorplus, .faq, .original-manual {
+  border-radius: var(--asir-radius-md);
+}
+.guide-step[open], .errorplus[open] { border-color: var(--blue); }
+.step-pill, .steps li::before {
+  background: var(--blue);
+  color: var(--asir-on-accent);
+}
+
+/* Contenido educativo y presentación de código */
+.hero {
+  background:
+    radial-gradient(circle at 100% 0%, rgb(83 224 206 / 24%), transparent 45%),
+    linear-gradient(115deg, #102b40, #123a49 67%, #11605d);
+  border: 1px solid #2f6670;
+  border-radius: 22px;
+}
+.hero .eyebrow { color: #84eddb; }
+.hero p { color: #e5f4f8; }
+.hero-actions button { color: #082a33; }
+.hero-actions button.secondary { color: #ffffff; }
+.ch-hero, .section {
+  border-color: var(--line);
+  border-radius: var(--asir-radius-lg);
+}
+.section { scroll-margin-top: 95px; }
+.section h2, .ch-hero h1, .home-title { letter-spacing: -.025em; }
+.section h2 .num { color: var(--blue); }
+.tile, .topic-card, .question, .cmd-card, .error-col, .error-lead {
+  border-radius: var(--asir-radius-md);
+}
+.topic-card {
+  transition: border-color .16s, background-color .16s, transform .16s;
+}
+.topic-card:hover { background: var(--panel); }
+.topic-card small, .eyebrow { color: var(--green); }
+.tabs a {
+  border-radius: 9px;
+  font-weight: 700;
+}
+.tabs a:hover { border-color: var(--blue); }
+.callout { border-left-color: var(--blue); }
+.codebox, .cmd-card pre, .stepcode, .simoutput {
+  background: var(--asir-code-bg);
+  color: #e8f5f8;
+}
+.codehead, .stepcode-top { background: #17354a; }
+.codehead, .stepcode-top small { color: #e4f1f7; }
+.copybtn, .stepcode-top button { background: #244d60; color: #ffffff; }
+.codebox code, .stepcode pre, .cmd-card pre code {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", monospace;
+}
+.table td code {
+  white-space: normal;
+  overflow-wrap: anywhere;
+}
+.table th { color: var(--muted); }
+
+/* Pantallas pequeñas: priorizar contenido y controles alcanzables */
+@media (max-width: 1020px) {
+  .top { flex-wrap: wrap; }
+  .toolbar { max-width: 100%; }
+}
+@media (max-width: 750px) {
+  html { scroll-padding-top: 20px; }
+  .top { position: relative; padding: 12px; gap: 10px; }
+  .toolbar {
+    width: 100%;
+    flex-wrap: nowrap;
+    gap: 7px;
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: thin;
+  }
+  .tool { flex: 0 0 auto; min-height: 42px; }
+  .envbar { gap: 8px; }
+  .envhead { width: 100%; }
+  .envcontrols { width: 100%; align-items: stretch; }
+  .envcontrols label { flex: 1 1 145px; min-width: 0; }
+  .envcontrols select { width: 100%; min-width: 0; }
+  .envtoggle { max-width: 100%; }
+  .envjump { flex: 1 1 100%; }
+  .aside { padding: 10px 12px; }
+  .navitem { min-width: 165px; }
+  .main { padding: 16px 12px 56px; }
+  .section { scroll-margin-top: 18px; }
+  .section, .ch-hero { padding: 18px 16px; }
+  .hero { padding: 24px 20px; }
+  .footnav { flex-wrap: wrap; }
+  .footnav > button { flex: 1 1 150px; }
+}
+@media (max-width: 380px) {
+  .brand strong { font-size: 13px; }
+  .brand-mark { width: 34px; height: 34px; }
+  .section, .ch-hero { padding: 16px 13px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+@media print {
+  body.dark {
+    --bg: #ffffff;
+    --surface: #ffffff;
+    --panel: #ffffff;
+    --surface-2: #edf3f4;
+    --shade: #ffffff;
+    --ink: #141c22;
+    --muted: #354651;
+    --blue: #126877;
+    --line: #cfd9df;
+    color: #141c22;
+    color-scheme: light;
+  }
+  .section, .ch-hero, .tile, .topic-card { box-shadow: none !important; }
+  .envbar { display: none !important; }
+  a { color: #143a49 !important; }
+}
